@@ -20,8 +20,8 @@ function loader(content, sourceMap) {
   this.cacheable();
 
   // path of the file being processed
-  var filename = path.relative(this.options.context || process.cwd(), this.resourcePath).replace(/\\/g, '/'),
-      options  = loaderUtils.parseQuery(this.query),
+  var filename = path.relative((this.options && this.options.context) || process.cwd(), this.resourcePath).replace(/\\/g, '/'),
+      options  = this.query ? loaderUtils.parseQuery(this.query) : {},
       useMap   = loader.sourceMap || options.sourceMap;
 
   // make sure the AST has the data from the original source map
